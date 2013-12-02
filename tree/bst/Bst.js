@@ -25,9 +25,11 @@ function Bst(){
 		}
 		else if(item < node.key){
 			node.leftChild = this.put(node.leftChild, item);
+			this.rotateRight(node);
 		}
 		else if (item > node.key){
 			node.rightChild = this.put(node.rightChild, item);
+			this.rotateLeft(node);
 		}
 		return node;
 	};
@@ -46,6 +48,20 @@ function Bst(){
 				x = x.rightChild;
 			}
 		}
+	};
+	
+	this.rotateLeft = function( node ){
+		var v = node.rightChild;
+		node.rightChild = v.leftChild;
+		v.leftChild = node;
+		return v;
+	};
+	
+	this.rotateRight = function( node ){
+		var v = node.leftChild;
+		node.leftChild = v.rightChild;
+		v.rightChild = node;
+		return v;
 	};
 	
 	this.inOrderTraversal = function(node){
